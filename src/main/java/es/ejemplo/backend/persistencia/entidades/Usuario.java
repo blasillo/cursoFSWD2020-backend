@@ -31,8 +31,9 @@ public class Usuario {
     private String clave;
 
     @Column (name="rol", nullable = false)
+    @Enumerated (value = EnumType.STRING)
     private Rol rol;
 
-    //@Transient
+    @Transient
     private String token;
 }

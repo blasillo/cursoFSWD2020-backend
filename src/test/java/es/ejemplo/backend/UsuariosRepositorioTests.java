@@ -6,19 +6,36 @@ import es.ejemplo.backend.persistencia.entidades.Usuario;
 import es.ejemplo.backend.persistencia.repositorios.UsuariosRepositorio;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.TransactionSystemException;
 
 
 import java.util.List;
 import java.util.Optional;
 
+
+@ExtendWith(SpringExtension.class)
 @DataJpaTest
+@TestPropertySource(properties = {
+        "spring.jpa.hibernate.ddl-auto=create"
+})
 public class UsuariosRepositorioTests {
 
 
     @Autowired
     UsuariosRepositorio repo;
+
+    @Test
+    public void deberia_inyectar_ropositorio() {
+        assertThat(repo).isNotNull();
+    }
 
     @Test
     public void no_deberia_encontrar_usuarios_si_esta_vacio() {
@@ -67,7 +84,21 @@ public class UsuariosRepositorioTests {
 
         assertThat(usuarioEncontrado).isEqualTo(usuario2);
     }
+    @Test
+    public void no_deberia_guardan_cuando_campo_obligatorio_nulo (){
 
+        Usuario usuario1 = new Usuario().builder()
+                .nombreUsuario("demo")
+                .correo("prueba@demo.com")
+                .clave(null)
+                .rol(Rol.ESTUDIANTE)
+                .build();
+
+
+        assertThrows(DataIntegrityViolationException.class, () -> {
+            repo.save(usuario1);
+        });
+    }
     @Test
     public void deberia_borrar_usuario_por_id() {
 
@@ -103,10 +134,5 @@ public class UsuariosRepositorioTests {
 
         assertThat(usuarios).hasSize(2).contains(usuario1, usuario3);
     }
-
-
-
-
-
 
 }
