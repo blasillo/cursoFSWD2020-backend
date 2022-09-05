@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -91,6 +92,51 @@ public class RegistroCursosRepositorioTests {
 
     }
 
+    @Test
+    public void deberia_buscar_por_profesor_id () {
+
+        Usuario estudiante = new Usuario().builder()
+                .nombreUsuario("demo")
+                .correo("prueba@demo.com")
+                .clave("123456")
+                .rol(Rol.ESTUDIANTE)
+                .build();
+
+        estudiante = usuariosRepo.save( estudiante);
+        assertThat( estudiante.getIdUsuario()).isNotNull();
+
+        Usuario profesor = new Usuario().builder()
+                .nombreUsuario("profesor")
+                .rol(Rol.PROFESOR)
+                .correo("profe@demo.com")
+                .clave("12344321")
+                .build();
+
+        profesor = usuariosRepo.save( profesor );
+        assertThat( profesor.getIdUsuario()).isNotNull();
+
+        Curso curso = new Curso( null, "Nombre curso", profesor );
+
+        curso = cursosRepo.save( curso );
+
+        assertThat( curso.getIdCurso()).isNotNull();
+
+        RegistroCurso registroCurso = new RegistroCurso(null, estudiante, curso);
+
+        registroCurso = repo.save( registroCurso);
+
+        log.info( registroCurso.toString());
+
+        assertThat( registroCurso.getId()).isNotNull();
+
+
+        List<RegistroCurso> registros = repo.findByEstudianteIdUsuario(  estudiante.getIdUsuario() );
+        assertThat( registros).hasSize(1).contains( registroCurso);
+
+        List<RegistroCurso> registros2 = repo.findByCursoProfesorIdUsuario(profesor.getIdUsuario());
+        assertThat( registros2).hasSize(1).contains( registroCurso);
+
+    }
 
 
 

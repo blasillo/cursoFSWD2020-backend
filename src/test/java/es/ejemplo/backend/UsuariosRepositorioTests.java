@@ -135,4 +135,42 @@ public class UsuariosRepositorioTests {
         assertThat(usuarios).hasSize(2).contains(usuario1, usuario3);
     }
 
+    @Test
+    public void deberia_buscar_por_rol () {
+        Usuario usuario1 = new Usuario().builder()
+                .nombreUsuario("demo")
+                .correo("prueba@demo.com")
+                .clave("123456")
+                .rol(Rol.ESTUDIANTE)
+                .build();
+
+        Usuario usuario2 = new Usuario().builder()
+                .nombreUsuario("demo 2")
+                .correo("prueba2@demo.com")
+                .clave("admin")
+                .rol(Rol.ADMINISTRADOR)
+                .build();
+
+        Usuario usuario3 = new Usuario().builder()
+                .nombreUsuario("demo 3")
+                .correo("prueba3@demo.com")
+                .clave("password")
+                .rol(Rol.PROFESOR)
+                .build();
+
+
+        usuario1 = repo.save(usuario1);
+        usuario2 = repo.save(usuario2);
+        usuario3 = repo.save(usuario3);
+
+
+        List<Usuario> estudiantes = repo.findByRol( Rol.ESTUDIANTE);
+        assertThat( estudiantes ).hasSize(1).contains( usuario1);
+
+        List<Usuario> profesores = repo.findByRol( Rol.PROFESOR );
+        assertThat( profesores ).hasSize(1).contains( usuario3);
+
+
+    }
+
 }
