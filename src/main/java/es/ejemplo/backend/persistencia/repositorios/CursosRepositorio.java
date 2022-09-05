@@ -1,6 +1,8 @@
 package es.ejemplo.backend.persistencia.repositorios;
 
-public interface CursosRepositorio /*     */ {
+import es.ejemplo.backend.persistencia.entidades.Curso;
+import org.springframework.data.jpa.repository.JpaRepository;
 
+public interface CursosRepositorio extends JpaRepository <Curso, Long> {
 
 }
