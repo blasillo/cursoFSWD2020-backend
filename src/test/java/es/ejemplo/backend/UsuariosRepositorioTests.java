@@ -33,7 +33,7 @@ public class UsuariosRepositorioTests {
     UsuariosRepositorio repo;
 
     @Test
-    public void deberia_inyectar_ropositorio() {
+    public void deberia_inyectar_repositorio() {
         assertThat(repo).isNotNull();
     }
 
