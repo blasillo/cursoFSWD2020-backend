@@ -14,13 +14,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Profile;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
 @SpringBootApplication
 @AllArgsConstructor
 @Slf4j
+
+
 public class CursosBackendApplication implements CommandLineRunner {
+
 
     private final UsuariosServicio usuariosServicio;
     private final CursosServicio cursosServicio;

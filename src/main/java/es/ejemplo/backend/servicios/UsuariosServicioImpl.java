@@ -2,6 +2,7 @@ package es.ejemplo.backend.servicios;
 
 import es.ejemplo.backend.persistencia.entidades.Usuario;
 import es.ejemplo.backend.persistencia.repositorios.UsuariosRepositorio;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import java.util.List;
 @Service
 @Transactional
 public class UsuariosServicioImpl implements UsuariosServicio {
+
 
     @Autowired
     private UsuariosRepositorio repositorio;

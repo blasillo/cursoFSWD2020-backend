@@ -7,9 +7,9 @@ import es.ejemplo.backend.persistencia.repositorios.CursosRepositorio;
 import es.ejemplo.backend.persistencia.repositorios.UsuariosRepositorio;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.NoSuchElementException;
@@ -21,9 +21,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @DataJpaTest
 public class CursosRepositorioTest {
 
+
     @Autowired
     private CursosRepositorio repo;
-
     @Autowired
     private UsuariosRepositorio usuariosRepo;
 
