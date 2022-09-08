@@ -2,6 +2,7 @@ package es.ejemplo.backend.controladores;
 
 import es.ejemplo.backend.persistencia.entidades.Rol;
 import es.ejemplo.backend.persistencia.entidades.Usuario;
+import es.ejemplo.backend.seguridad.JwtProveedor;
 import es.ejemplo.backend.servicios.CursosServicio;
 import es.ejemplo.backend.servicios.UsuariosServicio;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,8 @@ public class UsuariosControlador {
     @Autowired
     private CursosServicio cursosServicio;
 
+    @Autowired
+    private JwtProveedor jwtProveedor;
 
     @GetMapping("/api/v1/usuarios/login")
     public ResponseEntity<?> getUser(Principal principal){
@@ -37,7 +40,7 @@ public class UsuariosControlador {
         UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) principal;
         Usuario usuario = usuariosServicio.encontrarUsuarioPorNombre(authenticationToken.getName());
 
-        usuario.setToken("");
+        usuario.setToken(jwtProveedor.generarToken(authenticationToken));
         return new ResponseEntity<>(usuario, HttpStatus.OK);
     }
 
