@@ -4,13 +4,18 @@ import es.ejemplo.backend.persistencia.entidades.Rol;
 import es.ejemplo.backend.persistencia.entidades.Usuario;
 import es.ejemplo.backend.servicios.CursosServicio;
 import es.ejemplo.backend.servicios.UsuariosServicio;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@Slf4j
 public class UsuariosControlador {
 
     @Autowired
@@ -20,6 +25,21 @@ public class UsuariosControlador {
     private CursosServicio cursosServicio;
 
 
+    @GetMapping("/api/v1/usuarios/login")
+    public ResponseEntity<?> getUser(Principal principal){
+
+        log.info ("Solicitud login");
+
+        if(principal == null){
+            return ResponseEntity.ok(principal);
+        }
+        log.info ("Solicitud login : {}", principal.toString());
+        UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) principal;
+        Usuario usuario = usuariosServicio.encontrarUsuarioPorNombre(authenticationToken.getName());
+
+        usuario.setToken("");
+        return new ResponseEntity<>(usuario, HttpStatus.OK);
+    }
 
     @PostMapping("/api/v1/usuarios/registro")
     public ResponseEntity<?> registroUsuarios (@RequestBody Usuario usuario){
@@ -37,8 +57,6 @@ public class UsuariosControlador {
     public ResponseEntity<?> verTodosCursos(){
         return ResponseEntity.ok(cursosServicio.obtenerTodosCursos() );
     }
-
-
 
 
 }
