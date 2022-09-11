@@ -12,10 +12,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+//@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+
 public class EstudiantesControlador {
 
     @Autowired
     private RegistroCursosServicio registroCursosServicio;
+
 
 
     @GetMapping("/api/v1/estudiantes/{estudianteId}/cursos")
@@ -27,6 +30,7 @@ public class EstudiantesControlador {
                         .collect(Collectors.toList());
         return new ResponseEntity<>( cursos , HttpStatus.OK);
     }
+
 
     @PostMapping("/api/v1/estudiantes/inscripcion")
     public ResponseEntity<?> inscripcionEnCurso (@RequestBody RegistroCurso reg){

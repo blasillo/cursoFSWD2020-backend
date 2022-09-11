@@ -17,6 +17,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class SeguridadConfig {
@@ -47,6 +50,7 @@ public class SeguridadConfig {
 
 
         http.csrf().disable()
+                .cors().and()
                 .headers().frameOptions().sameOrigin()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -58,6 +62,9 @@ public class SeguridadConfig {
                 .antMatchers("/api/v1/administracion/**").hasRole("ADMINISTRADOR")
                 .anyRequest().authenticated()
                 .and()
+                .logout().permitAll()
+                        .logoutRequestMatcher( new AntPathRequestMatcher("/api/v1/usuarios/logout", "POST"))
+                .and()
                 .formLogin().loginPage("/api/v1/usuarios/login")
                 .and()
                 .httpBasic(); //permitir autenticación básica. Cabecera http "Basic Base64(user:pass)"
@@ -68,5 +75,18 @@ public class SeguridadConfig {
 
         return http.build();
     }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer(){
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedMethods("*");
+            }
+        };
+    }
+
 
 }

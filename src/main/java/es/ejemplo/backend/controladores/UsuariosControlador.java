@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @Slf4j
 public class UsuariosControlador {
 
@@ -60,6 +59,7 @@ public class UsuariosControlador {
     public ResponseEntity<?> verTodosCursos(){
         return ResponseEntity.ok(cursosServicio.obtenerTodosCursos() );
     }
+
 
 
 }
