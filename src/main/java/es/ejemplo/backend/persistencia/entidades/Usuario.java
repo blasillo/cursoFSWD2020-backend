@@ -1,5 +1,6 @@
 package es.ejemplo.backend.persistencia.entidades;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class Usuario {
     private String correo;
 
     @Column (name="clave", nullable = false, length = 255)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String clave;
 
     @Column (name="rol", nullable = false)
