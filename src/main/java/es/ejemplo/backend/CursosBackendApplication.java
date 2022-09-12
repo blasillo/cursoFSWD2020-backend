@@ -28,9 +28,9 @@ import java.util.List;
 public class CursosBackendApplication implements CommandLineRunner {
 
 
-    private final UsuariosServicio usuariosServicio;
-    private final CursosServicio cursosServicio;
-    private final RegistroCursosServicio registroCursosServicio;
+//    private final UsuariosServicio usuariosServicio;
+//    private final CursosServicio cursosServicio;
+//    private final RegistroCursosServicio registroCursosServicio;
 
     public static void main(String[] args) {
         SpringApplication.run(CursosBackendApplication.class, args);
@@ -40,10 +40,11 @@ public class CursosBackendApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         log.info ("Inicializando datos de demos ...");
 
-        creacionUsuariosDemo();
-        creacionCursosDemo();
-        registrarEstudiantesCursosDemo();
+        //creacionUsuariosDemo();
+        //creacionCursosDemo();
+        //registrarEstudiantesCursosDemo();
     }
+/*
 
     private void creacionUsuariosDemo () {
         Usuario usuario = new Usuario().builder()
@@ -105,5 +106,6 @@ public class CursosBackendApplication implements CommandLineRunner {
                 new RegistroCurso(null, estudiante,curso) );} );
 
     }
+*/
 
 }
