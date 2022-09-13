@@ -28,84 +28,16 @@ import java.util.List;
 public class CursosBackendApplication implements CommandLineRunner {
 
 
-//    private final UsuariosServicio usuariosServicio;
-//    private final CursosServicio cursosServicio;
-//    private final RegistroCursosServicio registroCursosServicio;
-
     public static void main(String[] args) {
         SpringApplication.run(CursosBackendApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-        log.info ("Inicializando datos de demos ...");
+        log.info ("Iniciando aplicación ...");
 
-        //creacionUsuariosDemo();
-        //creacionCursosDemo();
-        //registrarEstudiantesCursosDemo();
-    }
-/*
-
-    private void creacionUsuariosDemo () {
-        Usuario usuario = new Usuario().builder()
-                .nombreUsuario("admin")
-                .correo("prueba2@demo.com")
-                .clave("admin")
-                .rol(Rol.ADMINISTRADOR)
-                .build();
-
-        usuariosServicio.guardarUsuario( usuario);
-
-        Usuario profesor = new Usuario().builder()
-                .nombreUsuario("profesor")
-                .correo("profe@demo.com")
-                .clave("lacasadepapel")
-                .rol(Rol.PROFESOR)
-                .build();
-
-        usuariosServicio.guardarUsuario( profesor);
-
-        Usuario estudiante = new Usuario().builder()
-                .nombreUsuario("estudiante1")
-                .correo("estudiante@demo.com")
-                .clave("123456")
-                .rol(Rol.ESTUDIANTE)
-                .build();
-
-        usuariosServicio.guardarUsuario( estudiante);
-    }
-
-    private void creacionCursosDemo () {
-
-        Usuario profesor = usuariosServicio.encontrarUsuarioPorNombre("profesor");
-
-        Curso curso1 = new Curso(null,"Spring Boot - Introducción", profesor);
-
-        cursosServicio.crearCurso( curso1);
-
-        Curso curso2 = new Curso(null,"Spring Boot - IoC y DI", profesor);
-        cursosServicio.crearCurso( curso2);
 
     }
 
-    private void registrarEstudiantesCursosDemo() {
-
-
-        Usuario estudiante = new Usuario().builder()
-                .nombreUsuario("estudiante2")
-                .correo("estudiante2@demo.com")
-                .clave("1234567890")
-                .rol(Rol.ESTUDIANTE)
-                .build();
-
-        usuariosServicio.guardarUsuario( estudiante );
-
-        List<Curso> cursos = cursosServicio.obtenerTodosCursos();
-
-        cursos.forEach( curso -> { registroCursosServicio.guardarRegistro(
-                new RegistroCurso(null, estudiante,curso) );} );
-
-    }
-*/
 
 }
