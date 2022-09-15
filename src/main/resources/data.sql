@@ -1,4 +1,4 @@
-insert into usuarios (id_usuario, clave, correo, nombre_usuario, rol) values (default, '$2a$10$eGoJElZIDxGwR6bu.eiFE.R9.izhdCckH34oQiQHh.aWQFOdfULEi','e1@demo.org' ,'Estudiante1', 'ESTUDIANTE');
+﻿insert into usuarios (id_usuario, clave, correo, nombre_usuario, rol) values (default, '$2a$10$eGoJElZIDxGwR6bu.eiFE.R9.izhdCckH34oQiQHh.aWQFOdfULEi','e1@demo.org' ,'Estudiante1', 'ESTUDIANTE');
 insert into usuarios (id_usuario, clave, correo, nombre_usuario, rol) values (default, '$2a$10$FuFsBe4JdwTNC16Nox/yPesAm2REgAmmmgpQoVrJozQF8DZcYvuZe','e2@demo.org', 'Estudiante2', 'ESTUDIANTE');
 
 insert into usuarios (id_usuario, clave, correo, nombre_usuario, rol) values (default, '$2a$10$q389tPG2IBuCDII3wV65D.mINlBUSwQoU5Xcmqu1oC5b7.4/CiGxK', 'p1@demo.org', 'Profesor1', 'PROFESOR');
