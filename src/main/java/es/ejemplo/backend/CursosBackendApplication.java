@@ -7,9 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
-import java.util.List;
-
 @SpringBootApplication
 @AllArgsConstructor
 @Slf4j
@@ -21,7 +18,7 @@ public class CursosBackendApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args)  {
         log.info ("Iniciando aplicación ...");
 
 
