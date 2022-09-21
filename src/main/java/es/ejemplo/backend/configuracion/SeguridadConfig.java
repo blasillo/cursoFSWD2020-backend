@@ -56,7 +56,7 @@ public class SeguridadConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeRequests()
-                .antMatchers("/api/v1/usuarios/**", "/h2-console/**").permitAll()
+                .antMatchers("/api/v1/usuarios/**", "/h2-console/**","/actuator/**").permitAll()
                 .antMatchers("/api/v1/estudiantes/**").hasRole("ESTUDIANTE")
                 .antMatchers("/api/v1/profesores/**").hasRole("PROFESOR")
                 .antMatchers("/api/v1/administracion/**").hasRole("ADMINISTRADOR")
